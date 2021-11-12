@@ -8,3 +8,6 @@
    > `npm install`
 4. One Last Thing!
    > `expo start`
+
+**Happy Coding**
+
