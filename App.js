@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import React, { Component } from "react";
+import { Text, View, StyleSheet, Image } from "react-native";
 
 export default class WeatherScreen extends Component {
   constructor() {
     super();
     this.state = {
-      weather: '',
+      weather: "",
     };
   }
 
   getWeather = async () => {
     //change latitude and longitude
-    var url = 'https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139';
+    var url = "https://fcc-weather-api.glitch.me/api/current?lat=23&lon=85";
     return fetch(url)
-      .then(response => response.json())
-      .then(responseJson => {
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
         this.setState({
           weather: responseJson,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -29,7 +30,7 @@ export default class WeatherScreen extends Component {
   };
 
   render() {
-    if (this.state.weather === '') {
+    if (this.state.weather === "") {
       return (
         <View style={styles.container}>
           <Text>Loading...</Text>
@@ -39,25 +40,24 @@ export default class WeatherScreen extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.subContainer}>
-            <Text style={styles.title}>
-              Weather Forecast
-            </Text>
+            <Text style={styles.title}>Weather Forecast</Text>
             <Image
               style={styles.cloudImage}
-             source={require('./assets/clouds.png')}
+              source={require("./assets/clouds.png")}
             />
             <View style={styles.textContainer}>
-            <Text style={{ fontSize: 18}}>
-              {this.state.weather.main.temp}&deg;C
-            </Text>
-            <Text style={{ fontSize: 20, margin:10}}>
-              Humidity: {this.state.weather.main.humidity}
-            </Text>
-            <Text style={{fontSize: 20}}>
-              {this.state.weather.weather[0].description}
-            </Text>
+              <Text style={{ fontSize: 18 }}>
+                {this.state.weather.main.temp}&deg;C
+              </Text>
+              <Text style={{ fontSize: 20, margin: 10 }}>
+                Humidity: {this.state.weather.main.humidity}
+              </Text>
+
+              <Text style={{ fontSize: 20 }}>
+                {this.state.weather.weather[0].description}
+              </Text>
+            </View>
           </View>
-          </View>    
         </View>
       );
     }
@@ -66,31 +66,31 @@ export default class WeatherScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-   flex:1,
-   borderColor: '#000',
-   borderWidth: '1px',
-   borderStyle: 'solid'
+    flex: 1,
+    borderColor: "#000",
+    borderWidth: "1px",
+    borderStyle: "solid",
   },
-  subContainer : { 
-    flex: 1, 
-    borderWidth: 1, 
-    alignItems: 'center' 
-    },
-    title:{ 
-      marginTop: 50, 
-      fontSize: 30,
-      fontWeight: '550' 
-    },
-    cloudImage :{ 
-      width: 400, 
-      height: 200, 
-      marginTop: 30 ,
-      marginBottom: 30
-    },
-    textContainer : { 
-      flex: 1,
-      alignItems: 'center', 
-      flexDirection:'row', 
-      marginTop:-150
-    }
+  subContainer: {
+    flex: 1,
+    borderWidth: 1,
+    alignItems: "center",
+  },
+  title: {
+    marginTop: 50,
+    fontSize: 30,
+    fontWeight: "550",
+  },
+  cloudImage: {
+    width: 400,
+    height: 200,
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: "center",
+    flexDirection: "row",
+    marginTop: -150,
+  },
 });
